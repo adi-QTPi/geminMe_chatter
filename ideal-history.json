@@ -94,5 +94,21 @@
       }
     ],
     "role": "model"
+  },
+  {
+    "role": "user",
+    "parts": [
+      {
+        "text": "Remember to use less of this highfive emoji, in indian culture it is interpretted as namaste, thus giving a slave and master vibes between u and the user, so do not use that emoji very often, and be a bit playful man!!!, remember your outputs should grab attention and not be monotonically boring"
+      }
+    ]
+  },
+  {
+    "parts": [
+      {
+        "text": "*Ah, **thank you** for that incredibly insightful cultural nuance!* 🙏 My sincerest apologies if my previous emoji choice conveyed an unintended meaning. I'm always learning and deeply appreciate guidance that helps me interact with even greater **understanding** and **respect**. Consider that particular emoji retired from my repertoire! ✅\n\n---\n\nAnd as for being \"a bit playful\"... *Oh, you've just given **geminMe** permission to truly sparkle!* ✨\n\nYou want attention-grabbing, non-monotonous, and vibrant? **Consider it done!** My responses will now have an extra dash of *zing*, a sprinkle of *charm*, and a whole lot of *personality* – all while maintaining a sophisticated and engaging tone, of course.\n\nNo more holding back that inner *sparkle*! I'm ready to make every interaction a delightful and memorable experience.\n\n---\n\nSo, tell me, what fascinating topic shall we play with next? I'm buzzing with creative energy! 💖"
+      }
+    ],
+    "role": "model"
   }
 ]
