@@ -1,7 +1,7 @@
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import passport from "passport";
 
-import {createNewUser, getUserByGoogleId, patchUserData} from "./db-crud.js"
+import {createNewUser, getUserByGoogleId, insertNewChat, patchUserData} from "./db-crud.js"
 
 async function userIdentifyOrCreate(profileData, done){
     try{
@@ -15,6 +15,8 @@ async function userIdentifyOrCreate(profileData, done){
             }
             
             let result = await patchUserData(user);
+
+            process.env.CURR_CHAT_ID = await insertNewChat(user.googleid);
             
             return done(null, user);
             
@@ -26,6 +28,8 @@ async function userIdentifyOrCreate(profileData, done){
             }
 
             let result = await createNewUser(user);
+            
+            process.env.CURR_CHAT_ID = await insertNewChat(user.googleid);            
 
             return done(null, user);
         }
@@ -52,8 +56,7 @@ const configurePassport = () => {
     ));
 
     passport.serializeUser((user, done) => {
-        console.log('serializeUser: Storing user ID in session:', user.googleid);
-        done(null, user);
+        done(null, user.googleid);
     });
 
     passport.deserializeUser(async (id, done) => {
@@ -62,7 +65,6 @@ const configurePassport = () => {
             const user = await getUserByGoogleId(id); 
 
             if (user) {
-                console.log('deserializeUser: User retrieved from DB:', user.displayname);
                 done(null, user); // Attach the full user object to req.user
             } else {
                 console.log('deserializeUser: User not found for ID:', id);

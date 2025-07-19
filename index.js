@@ -4,6 +4,8 @@ import express from "express";
 import passport from "passport";
 const app = express();
 
+let curr_chat_id;
+
 app.use(session({
     secret: process.env.SESSION_SECRET_KEY,
     resave: false,
@@ -20,15 +22,21 @@ app.use(express.static('public'));
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
+app.use(passport.initialize());
+app.use(passport.session());
+import configurePassport from "./util/oauth.js";
+configurePassport();
+
 import { handlePostApiAsk } from "./controllers/api.js";
 app.post("/api/ask", handlePostApiAsk);
 
 import { handleRenderMainPage, handleRenderLoginPage } from "./controllers/rendering.js";
 app.get("/login", handleRenderLoginPage);
-app.get("/", handleRenderMainPage);
 
-import configurePassport from "./util/oauth.js";
-configurePassport();
+import { checkWhetherLoggedIn } from "./middlewares/authorise.js";
+app.get("/",
+  checkWhetherLoggedIn,
+  handleRenderMainPage);
 
 app.get("/login/google/oauth", passport.authenticate("google", { scope : ["profile", "email"]}));
 
@@ -36,6 +44,9 @@ app.get("/oauth", passport.authenticate("google", {
   successReturnToOrRedirect: "/",
   failureRedirect: "/login"
 }));
+
+import { handlePostLogout } from "./controllers/api.js";
+app.post("/logout", handlePostLogout);
 
 app.listen(process.env.SERVER_PORT, ()=>{
   console.log(`the app has started now\nAccess on localhost:${process.env.SERVER_PORT}`);

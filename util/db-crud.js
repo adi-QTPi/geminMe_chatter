@@ -35,8 +35,23 @@ export async function patchUserData(obj){
     }
 }
 
-// const x = await patchUserData({
-//     googleid:"108304993546232265308",
-//     displayname:"Aditya Verma",
-//     email:"halwa@gmail.com"
-// });
+import base_prompt from "../base_prompt.js";
+
+export async function insertNewChat(googleid){
+    const result = await sql`
+INSERT INTO chats (googleId, chat_history) VALUES (${googleid}, ${JSON.stringify(base_prompt)}::jsonb) RETURNING chatId;
+    `;
+
+    return result[0].chatid;
+}
+
+export async function fetchHistory(chatid){
+    const result = await sql`SELECT chat_history FROM chats WHERE chatid = ${chatid}`;
+    return result[0]["chat_history"];
+}
+
+export async function updateHistory(chatid, new_history){
+    const result = await sql`UPDATE chats SET chat_history = ${JSON.stringify(new_history)}::jsonb WHERE chatId = ${chatid} RETURNING chatid;`;
+
+    return result[0].chatid;
+}

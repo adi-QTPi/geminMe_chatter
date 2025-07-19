@@ -1,3 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@100..900&family=Caveat:wght@400..700&family=Truculenta:opsz,wght@12..72,100..900&display=swap');
+
 code{
     color:aquamarine 
+}
+
+.bitcount-grid-single-200 {
+  font-family: "Bitcount Grid Single", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0.5,
+    "ELSH" 0,
+    "ELXP" 0;
+}
+.bitcount-grid-single-400 {
+  font-family: "Bitcount Grid Single", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0.5,
+    "ELSH" 0,
+    "ELXP" 0;
+}
+.bitcount-grid-single-500 {
+  font-family: "Bitcount Grid Single", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0.5,
+    "ELSH" 0,
+    "ELXP" 0;
+}
+
+.truculenta-normal {
+  font-family: "Truculenta", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+.truculenta-spaced {
+  font-family: "Truculenta", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+    letter-spacing: 0.05rem;
+}
+
+.h-1rem{
+    height: 1rem;
+}
+.h-2rem{
+    height: 2rem;
+}
+
+.vh-90{
+    height: 90vh;
+}
+
+.fs-small{
+    font-size: 0.9rem;
+}
+.fs-smaller{
+    font-size: 0.8rem;
+}
+
+.fs-medium{
+    font-size: 1.4rem;
 }

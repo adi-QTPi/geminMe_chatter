@@ -1,16 +1,22 @@
 import { chatWithContext } from "../util/genai.js";
 
 export async function handlePostApiAsk(req, res){
-    console.log("\npost request controller for api/ask\n");
+    console.log("\nnew query to llm...\n");
 
     const prompt = req.body.prompt;
     
     const ans = await chatWithContext(prompt)
 
-    console.log(ans);
     req.session.toHomePage = {
+        ...req.session.toHomePage,
         response: ans
     }
 
     res.redirect("/");
+}
+
+export async function handlePostLogout(req, res){
+    req.logout(()=>{
+        res.status(200).redirect("/");
+    });
 }
