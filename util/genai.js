@@ -7,15 +7,16 @@ import base_prompt from "../base_prompt.js";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-export async function chatWithContext(message_to_ai) {
+export async function chatWithContext(message_to_ai, req) {
   try{
     let history;
     let msg;
     let chat;
-    if(process.env.CURR_CHAT_ID){
-      history = await fetchHistory(process.env.CURR_CHAT_ID);
 
-      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    if(req.session.curr_chat_id){
+      history = await fetchHistory(req.session.curr_chat_id);
+
+      const model = genAI.getGenerativeModel({ model: process.env.GEMINI_MODEL_NAME });
     
       chat = model.startChat({
         history: history,
@@ -24,10 +25,12 @@ export async function chatWithContext(message_to_ai) {
         },
       });
       msg = message_to_ai;
+      console.log("the curr_chat_id here is -> ", req.session.curr_chat_id);
     }
     else{
       history = JSON.stringify(base_prompt[0].parts[0]);
-      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+      const model = genAI.getGenerativeModel({ model: process.env.GEMINI_MODEL_NAME });
     
       chat = model.startChat({
         generationConfig: {
@@ -43,8 +46,8 @@ export async function chatWithContext(message_to_ai) {
     const history_unit = response.candidates[0].content;
     const display_response = history_unit.parts[0].text;
 
-    if(process.env.CURR_CHAT_ID){
-      let x = await updateHistory(process.env.CURR_CHAT_ID, history);
+    if(req.session.curr_chat_id){
+      let x = await updateHistory(req.session.curr_chat_id, history);
     }
 
     return display_response;

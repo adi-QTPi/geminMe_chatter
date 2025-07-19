@@ -15,8 +15,6 @@ async function userIdentifyOrCreate(profileData, done){
             }
             
             let result = await patchUserData(user);
-
-            process.env.CURR_CHAT_ID = await insertNewChat(user.googleid);
             
             return done(null, user);
             
@@ -27,9 +25,7 @@ async function userIdentifyOrCreate(profileData, done){
                 email:profileData.email
             }
 
-            let result = await createNewUser(user);
-            
-            process.env.CURR_CHAT_ID = await insertNewChat(user.googleid);            
+            let result = await createNewUser(user);          
 
             return done(null, user);
         }
