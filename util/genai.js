@@ -24,7 +24,7 @@ export async function chatWithContext(message_to_ai) {
     const chat = model.startChat({
       history: history_var,
       generationConfig: {
-        maxOutputTokens: process.env.MAX_OUTPUT_TOKEN,
+        maxOutputTokens: process.env.MAX_OUTPUT_TOKENS,
       },
     });
     
