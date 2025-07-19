@@ -1,6 +1,7 @@
 import "dotenv/config"
 import session from "express-session";
 import express from "express";
+import passport from "passport";
 const app = express();
 
 app.use(session({
@@ -22,9 +23,20 @@ app.set("views", "./views");
 import { handlePostApiAsk } from "./controllers/api.js";
 app.post("/api/ask", handlePostApiAsk);
 
-import { handleRenderMainPage } from "./controllers/rendering.js";
+import { handleRenderMainPage, handleRenderLoginPage } from "./controllers/rendering.js";
+app.get("/login", handleRenderLoginPage);
 app.get("/", handleRenderMainPage);
+
+import configurePassport from "./util/oauth.js";
+configurePassport();
+
+app.get("/login/google/oauth", passport.authenticate("google", { scope : ["profile", "email"]}));
+
+app.get("/oauth", passport.authenticate("google", {
+  successReturnToOrRedirect: "/",
+  failureRedirect: "/login"
+}));
 
 app.listen(process.env.SERVER_PORT, ()=>{
   console.log(`the app has started now\nAccess on localhost:${process.env.SERVER_PORT}`);
-})
+});

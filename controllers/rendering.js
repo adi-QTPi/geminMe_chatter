@@ -7,3 +7,7 @@ export async function handleRenderMainPage(req,res){
     }  
     res.render("home", { toHomePage } );
 }
+
+export async function handleRenderLoginPage(req, res){
+    res.status(200).render("login");
+}
