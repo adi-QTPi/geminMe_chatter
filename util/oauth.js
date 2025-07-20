@@ -40,7 +40,7 @@ const configurePassport = () => {
     passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "/oauth"
+        callbackURL: "http://geminme.up.railway.app/oauth"
     },
     async function(accessToken, refreshToken, profile, cb) {
         userIdentifyOrCreate(
