@@ -48,6 +48,6 @@ app.get("/oauth", passport.authenticate("google", {
 import { handlePostLogout } from "./controllers/api.js";
 app.post("/logout", handlePostLogout);
 
-app.listen(process.env.SERVER_PORT, ()=>{
-  console.log(`the app has started now\nAccess on localhost:${process.env.SERVER_PORT}`);
+app.listen(process.env.PORT, process.env.HOST ,()=>{
+  console.log(`the app has started now\nAccess on ${process.env.HOST}:${process.env.PORT}`);
 });
