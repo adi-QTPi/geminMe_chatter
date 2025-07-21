@@ -1,6 +1,6 @@
-FROM node:24.4.1
+FROM node:latest
 
-ENV SERVER_PORT=6060
+ENV PORT=10000
 ENV MAX_OUTPUT_TOKENS=2000
 ENV DATABASE_URL='postgresql://neondb_owner:npg_rd2LvBSm4bRn@ep-twilight-surf-a1x2qkhc-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
 ENV GEMINI_MODEL_NAME "gemini-2.5-flash"
@@ -12,6 +12,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE ${SERVER_PORT}
+EXPOSE ${PORT}
 
 CMD [ "npm", "start" ]
