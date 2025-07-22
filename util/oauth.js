@@ -3,6 +3,8 @@ import passport from "passport";
 
 import {createNewUser, getUserByGoogleId, insertNewChat, patchUserData} from "./db-crud.js"
 
+import "dotenv/config"
+
 async function userIdentifyOrCreate(profileData, done){
     try{
         let user = await getUserByGoogleId(profileData.sub);
