@@ -63,12 +63,11 @@ const configurePassport = () => {
             if (user) {
                 done(null, user); // Attach the full user object to req.user
             } else {
-                console.log('deserializeUser: User not found for ID:', id);
                 done(null, false); // User not found (e.g., deleted from DB)
             }
         } catch (err) {
             console.error('Error during deserializeUser:', err);
-            done(err, null); // Pass the error
+            done(err, null);
         }
     });
 }
@@ -81,7 +80,5 @@ const configurePassport = () => {
  @param {string} refreshToken
  @param {function} done - Passport's callback function (err, user).
  */
-
-
 
 export default configurePassport;
