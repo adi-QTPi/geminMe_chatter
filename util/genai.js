@@ -25,7 +25,6 @@ export async function chatWithContext(message_to_ai, req) {
         },
       });
       msg = message_to_ai;
-      console.log("the curr_chat_id here is -> ", req.session.curr_chat_id);
     }
     else{
       history = JSON.stringify(base_prompt[0].parts[0]);

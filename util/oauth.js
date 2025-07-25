@@ -33,7 +33,7 @@ async function userIdentifyOrCreate(profileData, done){
         }
         
     }catch(err){
-        console.log("error in user create or identify function : ",err);
+        console.error("error in user create or identify function : ",err);
         return done(err,null);
     }
 }
