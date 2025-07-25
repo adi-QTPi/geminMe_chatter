@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +11,8 @@
     
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-<nav class="navbar navbar-dark bg-dark">
-    <div class="col-4 ms-0 d-flex align-items-center justify-content-start px-5 p-1">
+<nav class="navbar navbar-dark bg-dark d-flex flex-column flex-lg-row align-items-center">
+    <div class="col-4 mx-auto ms-lg-0 d-flex align-items-center justify-content-start px-lg-5 p-1">
         <img class="h-2rem" src="/images/logo-compact.png" alt="compact-logo">
         <div class="text-light bitcount-grid-single-200 fs-3">GeminMe</div>
     </div>
@@ -27,29 +27,33 @@
         </div>
     <% } else { %>
         <div class="mx-auto d-flex flex-column justify-content-around align-items-center">
-            <div class="text-secondary"><span class="text-primary fs-3">Sing In</span> for Contextual conversations</div>
+            <div class="text-secondary"><span class="text-primary fs-3">Sign In</span> for Contextual conversations</div>
         </div>
     <% } %>
 
     <% if (toHomePage && toHomePage.user) { %>
-        <form class="ms-auto col-2 me-5 pe-1" action="/logout" method="post">
+        <form class="ms-auto col-lg-2 me-5 pe-1" action="/logout" method="post">
             <button class="btn btn-danger col-12 bitcount-grid-single-400 fs-3" type="submit">Logout</button>
         </form>
     <% } else { %>
-        <form class="ms-auto col-2 me-5 pe-1" action="/login" method="get">
+        <form class="ms-auto col-lg-2 me-5 pe-1" action="/login" method="get">
             <button class="btn btn-info col-12 bitcount-grid-single-400 fs-3" type="submit">Signin</button>
         </form>
     <% } %>
 </nav>
-<body class="bg-secondary">
-    <div class="d-flex flex-column align-items-center justify-content-center vh-90 gap-3">
-        <div class="container col-11 col-lg-10 response-space fs-4 h-75 overflow-auto text-light">
+<body class="bg-secondary h-100 d-flex flex-column">
+    <div class="d-flex flex-column align-items-center justify-content-center  gap-3 flex-grow-1">
+        <div class="container col-11 col-lg-10 response-space fs-4 overflow-auto text-light mt-4">
             <% if (toHomePage && toHomePage.response) { %>
                 <%- toHomePage.response %>
+            <% } else { %>
+             <div class="fs-2 truculenta-normal">
+                Hello user ! 
+             </div>
             <% } %>
         </div>
 
-        <form class="form-floating mx-auto col-10 col-lg-6 d-flex gap-4" action="/api/ask" method="post" id="form">
+        <form class="form-floating mt-auto mb-5 mx-auto col-10 col-lg-6 d-flex gap-4 position-sticky-bottom" action="/api/ask" method="post" id="form">
             <textarea class="form-control form-control-lg" placeholder="abc" type="text" name="prompt" id="expandable-prompt" autofocus></textarea>
             <label for="prompt" >so geminMe, tell me...</label>
             <button class="btn btn-dark w-auto fs-small truculenta-spaced" type="submit">Submit <br> (cmd+enter)</button>
