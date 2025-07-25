@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,51 +11,54 @@
     
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-<nav class="navbar navbar-dark bg-dark d-flex flex-column flex-lg-row align-items-center">
-    <div class="col-4 mx-auto ms-lg-0 d-flex align-items-center justify-content-start px-lg-5 p-1">
-        <img class="h-2rem" src="/images/logo-compact.png" alt="compact-logo">
-        <div class="text-light bitcount-grid-single-200 fs-3">GeminMe</div>
-    </div>
 
-    <% if (toHomePage && toHomePage.user) { %>
-        <div class="text-light mx-auto d-flex flex-column justify-content-around align-items-center">
-            <div class="fs-small text-primary">
-                Welcome 
-                <span class="fs-medium truculenta-normal"><%= toHomePage.user.displayname %></span>
+<body class="bg-secondary d-flex flex-column vh-100 overflow-hidden">
+    <nav class="navbar navbar-dark bg-dark d-flex flex-column flex-lg-row align-items-center flex-shrink-0 position-sticky top-0">
+        <div class="mx-auto ms-lg-0 d-flex align-items-center justify-content-start px-lg-5 p-1">
+            <img class="h-2rem" src="/images/logo-compact.png" alt="compact-logo">
+            <div class="text-light bitcount-grid-single-200 fs-3">GeminMe</div>
+        </div>
+
+        <% if (toHomePage && toHomePage.user) { %>
+            <div class="text-light mx-auto d-flex flex-column justify-content-around align-items-center">
+                <div class="fs-small text-primary">
+                    Welcome 
+                    <span class="fs-medium truculenta-normal"><%= toHomePage.user.displayname %></span>
+                </div>
+                <div class="fs-smaller text-secondary">(<%= toHomePage.user.emailid %>)</div>
             </div>
-            <div class="fs-smaller text-secondary">(<%= toHomePage.user.emailid %>)</div>
-        </div>
-    <% } else { %>
-        <div class="mx-auto d-flex flex-column justify-content-around align-items-center">
-            <div class="text-secondary"><span class="text-primary fs-3">Sign In</span> for Contextual conversations</div>
-        </div>
-    <% } %>
+        <% } else { %>
+            <div class="mx-auto d-flex flex-column justify-content-around align-items-center">
+                <div class="text-secondary"><span class="text-white fs-4">Sign In</span> for Contextual conversations</div>
+            </div>
+        <% } %>
 
-    <% if (toHomePage && toHomePage.user) { %>
-        <form class="ms-auto col-lg-2 me-5 pe-1" action="/logout" method="post">
-            <button class="btn btn-danger col-12 bitcount-grid-single-400 fs-3" type="submit">Logout</button>
-        </form>
-    <% } else { %>
-        <form class="ms-auto col-lg-2 me-5 pe-1" action="/login" method="get">
-            <button class="btn btn-info col-12 bitcount-grid-single-400 fs-3" type="submit">Signin</button>
-        </form>
-    <% } %>
-</nav>
-<body class="bg-secondary h-100 d-flex flex-column">
-    <div class="d-flex flex-column align-items-center justify-content-center  gap-3 flex-grow-1">
-        <div class="container col-11 col-lg-10 response-space fs-4 overflow-auto text-light mt-4">
+        <% if (toHomePage && toHomePage.user) { %>
+            <form class="ms-lg-auto me-lg-5 pe-lg-1" action="/logout" method="post">
+                <button class="btn btn-danger col-12 bitcount-grid-single-400 fs-3" type="submit">Logout</button>
+            </form>
+        <% } else { %>
+            <form class="ms-lg-auto me-lg-5 pe-lg-1" action="/login" method="get">
+                <button class="btn btn-info col-12 bitcount-grid-single-400 fs-3" type="submit">Signin</button>
+            </form>
+        <% } %>
+    </nav>
+    
+    <div class="d-flex flex-column align-items-center justify-content-start gap-3 flex-grow-1 overflow-auto my-5">
+
+        <div class="container col-11 col-lg-6 response-space fs-4 text-light d-flex flex-column flex-grow-1">    
             <% if (toHomePage && toHomePage.response) { %>
                 <%- toHomePage.response %>
             <% } else { %>
-             <div class="fs-2 truculenta-normal">
+                <div class="fs-2 truculenta-normal mx-auto">
                 Hello user ! 
-             </div>
+                </div>
             <% } %>
         </div>
 
-        <form class="form-floating mt-auto mb-5 mx-auto col-10 col-lg-6 d-flex gap-4 position-sticky-bottom" action="/api/ask" method="post" id="form">
+        <form class="form-floating mx-auto col-10 col-lg-6 d-flex gap-4  flex-shrink-0 position-sticky bottom-0 " action="/api/ask" method="post" id="form">
             <textarea class="form-control form-control-lg" placeholder="abc" type="text" name="prompt" id="expandable-prompt" autofocus></textarea>
-            <label for="prompt" >so geminMe, tell me...</label>
+            <label for="prompt" >Ask Anything!</label>
             <button class="btn btn-dark w-auto fs-small truculenta-spaced" type="submit">Submit <br> (cmd+enter)</button>
         </form>
     </div>
